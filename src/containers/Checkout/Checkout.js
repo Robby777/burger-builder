@@ -1,45 +1,45 @@
-import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
-import ContactData from './ContactData/ContactData';
+import CheckoutSummary from "../../components/Order/CheckoutSummary/CheckoutSummary";
+import ContactData from "./ContactData/ContactData";
 
-class Checkout extends Component {
+const Checkout = (props) => {
+  const checkoutCancelHandler = () => {
+    props.history.goBack();
+  };
 
-    checkoutCancelHandler = () => {
-        this.props.history.goBack();
-    }
+  const checkoutContinuedHandler = () => {
+    props.history.replace("/checkout/contact-data");
+  };
 
-    checkoutContinuedHandler = () => {
-        this.props.history.replace('/checkout/contact-data');
-    }
-    
-    render() {
-        let summary = <Redirect to="/" />
-        if (this.props.ings) {
-            const purchaseRedirect = this.props.purchased ? <Redirect to="/" /> : null 
-            summary = (
-                <div>
-                    { purchaseRedirect }
-                    <CheckoutSummary 
-                        ingredients={this.props.ings}
-                        checkoutCancelled={this.checkoutCancelHandler}
-                        checkoutContinued={this.checkoutContinuedHandler}/>
-                    <Route 
-                        path={this.props.match.path + '/contact-data'} 
-                        component={ContactData} />
-                </div>);
-        }
-        return summary;
-    }
-}
+  let summary = <Redirect to="/" />;
+  if (props.ings) {
+    const purchaseRedirect = props.purchased ? <Redirect to="/" /> : null;
+    summary = (
+      <div>
+        {purchaseRedirect}
+        <CheckoutSummary
+          ingredients={props.ings}
+          checkoutCancelled={checkoutCancelHandler}
+          checkoutContinued={checkoutContinuedHandler}
+        />
+        <Route
+          path={props.match.path + "/contact-data"}
+          component={ContactData}
+        />
+      </div>
+    );
+  }
+  return summary;
+};
 
-const mapStateToProps = state => {
-    return {
-        ings: state.burgerBuilder.ingredients,
-        purchased: state.order.purchased
-    }
-}
+const mapStateToProps = (state) => {
+  return {
+    ings: state.burgerBuilder.ingredients,
+    purchased: state.order.purchased,
+  };
+};
 
 export default connect(mapStateToProps)(Checkout);
