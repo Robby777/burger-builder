@@ -6,6 +6,7 @@ import Layout from "./hoc/Layout/Layout";
 import BurgerBuilder from "./containers/BurgerBuilder/BurgerBuilder";
 import Logout from "./containers/Auth/Logout/Logout";
 import * as actions from "./store/actions/index";
+import OrderViewerCon  from "./containers/Orders/OrderViewerCon/OrderViewerCon";
 
 const Checkout = React.lazy(() => {
   return import("./containers/Checkout/Checkout");
@@ -36,6 +37,7 @@ const App = (props) => {
     routes = (
       <Switch>
         <Route path="/checkout" render={(props) => <Checkout {...props} />} />
+        <Route path="/orders/:id" component={OrderViewerCon} />
         <Route path="/orders" render={(props) => <Orders {...props} />} />
         <Route path="/logout" component={Logout} />
         <Route path="/auth" render={(props) => <Auth {...props} />} />

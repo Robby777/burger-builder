@@ -62,3 +62,25 @@ export const fetchOrders = (token, userId) => {
     userId: userId,
   };
 };
+
+export const deleteOrderSuccess = (orderId) => {
+  return {
+    type: actionTypes.DELETE_ORDER_SUCCESS,
+    id: orderId,
+  };
+};
+
+export const deleteOrderFail = () => {
+  return {
+    type: actionTypes.DELETE_ORDER_FAIL
+  };
+};
+
+export const deleteOrder = (orderId, token, history) => {
+  return {
+    type: actionTypes.DELETE_ORDER,
+    id: orderId,
+    token: token,
+    history: history
+  };
+};

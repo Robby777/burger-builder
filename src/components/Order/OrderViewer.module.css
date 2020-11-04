@@ -1,0 +1,22 @@
+.OrderViewer {
+    width: 90%;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc; 
+    margin: 10px auto;
+    padding: 20px;
+}
+
+.DeleteButton {
+    background-color: #944317;
+    border: none;
+    color: white;
+    font-family: inherit;
+    padding: 10px 20px;
+    margin: auto;
+    display: block;
+    transition: transform .2s
+}
+
+.DeleteButton:hover {
+    transform: scale(1.2);
+}

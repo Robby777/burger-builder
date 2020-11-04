@@ -16,6 +16,9 @@ export {
   fetchOrdersStart,
   fetchOrdersSuccess,
   fetchOrdersFail,
+  deleteOrder,
+  deleteOrderSuccess,
+  deleteOrderFail
 } from "./order";
 
 export {

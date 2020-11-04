@@ -8,11 +8,15 @@ import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 const Orders = (props) => {
-  const { onFetchOrders, token, userId } = props;
+  const { onFetchOrders, token, userId, onDeleteOrder } = props;
 
   useEffect(() => {
     onFetchOrders(token, userId);
   }, [onFetchOrders, token, userId]);
+
+  const orderViewerHandler = (id) => {
+    props.history.push(props.match.url + '/' + id);
+  };
 
   let orders = <Spinner />;
   if (!props.loading) {
@@ -21,6 +25,8 @@ const Orders = (props) => {
         key={order.id}
         ingredients={order.ingredients}
         price={order.totalPrice}
+        deleteOrder={() => onDeleteOrder(order.id, token, props.history)}
+        orderViewer={() => orderViewerHandler(order.id)}
       />
     ));
   }
@@ -40,6 +46,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchOrders: (token, userId) =>
       dispatch(actions.fetchOrders(token, userId)),
+    onDeleteOrder: (orderId, token, history) => dispatch(actions.deleteOrder(orderId, token, history)),
   };
 };
 

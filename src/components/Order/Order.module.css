@@ -5,4 +5,16 @@
     padding: 10px;
     margin: 10px auto;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media(max-width: 800px) {
+   .Order {
+       display: block;
+   }
+}
+
+.Button {
+    margin: auto;
 }

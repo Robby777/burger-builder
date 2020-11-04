@@ -40,3 +40,14 @@ export function* fetchOrdersSaga(action) {
     yield put(actions.fetchOrdersFail(error));
   }
 }
+
+export function* deleteOrderSaga(action) {
+  yield put(actions.fetchOrdersStart());
+  try {
+    yield axios.delete(`/orders/${action.id}.json?auth=${action.token}`);
+    yield put(actions.deleteOrderSuccess(action.id, action.history));
+    yield action.history.push('/orders');
+  } catch(error) {
+    yield put(actions.deleteOrderFail());
+  }
+}
