@@ -22,11 +22,14 @@ export function* authUserSaga(action) {
     password: action.password,
     returnSecureToken: true,
   };
+
+  const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+
   let url =
-    "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBLkLbL1G5WgAhDYS4cqZbwwS0pR-e1mHA";
+    `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${apiKey}`;
   if (!action.isSignUp) {
     url =
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBLkLbL1G5WgAhDYS4cqZbwwS0pR-e1mHA";
+      `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${apiKey}`;
   }
 
   try {
